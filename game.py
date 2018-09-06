@@ -8,6 +8,8 @@ playername = input('What is your name? ')
 def number_guess():
     play_again = 'y'
     best_score = 1000000000000
+    max_tries = 10
+
 
     while play_again.lower() == 'y':
 
@@ -17,7 +19,7 @@ def number_guess():
         i = 0
         guess = int()
 
-        while guess != number:
+        while i < max_tries:
             i += 1
 
             while True:
@@ -33,21 +35,17 @@ def number_guess():
                 print('Your guess is too high, try again')
             elif guess < number:
                 print('Your guess is too low, try again')
-        print('Well done, {}! You found my number in {} tries'.format(playername,i))
+            else:
+                print('Well done, {}! You found my number in {} tries'.format(playername,i))
+                if i < best_score:
+                    best_score = i
+                print('Your current best is {} tries.'.format(best_score))
+                break
 
-        if i < best_score:
-            best_score = i
+        if i == max_tries:
+            print("Too many tries!")
 
-        print('Your current best is {} tries.'.format(best_score))
         play_again = input('Do you want to play again (Y) or (N)? ')
-
-
-
-# Add prompt for play again/restart
-# Create variable for lower attempts to compare to i (current)
-# Print message to state best score
-
-
 
 number_guess()
 
